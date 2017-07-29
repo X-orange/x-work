@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>节点列表</title>
+    <link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ROOT__/APP/Modules/Admin/Tpl/Public/css/node.css" rel="stylesheet">
+</head>
+<body>
+<div id = "container">
+	<a href = "{:U('Admin/Rbac/role')}"><button type="button" class="btn btn-primary">返回</button></a>
+	<form action="{:U('Admin/Rbac/setAccess')}" method="post">
+		<foreach name = "node" item = "app">
+			<div class="panel panel-info" id="app">
+				<div class="panel-heading">
+					<label class="checkbox-inline">
+					  <input type="checkbox" value="{$app.id}_1" name="access[]" level="1" > <span class="panel-title" id="app-tit">{$app.title}</span>
+					</label>
+				</div>
+				<div id="app-cont">
+					<foreach name = "app.child" item = "action">
+						<div class="panel-body" >
+							<div id="action">
+								<label class="checkbox-inline">
+								  <input type="checkbox" value="{$action.id}_2" name="access[]" level="2"> <strong>{$action.title}</strong>
+								</label>
+							</div>
+							<foreach name ="action.child" item = "method">
+								<div id="method">
+									<label class="checkbox-inline">
+									  <input type="checkbox" value="{$method.id}_3" name="access[]" level="3"> <span>{$method.title}</span>
+									</label>
+								</div>
+							</foreach>
+						</div>
+					</foreach>
+				</div>
+			</div>
+		</foreach>
+		<button type="submit" class="btn btn-success" >保存修改</button>
+	</form>
+</div>
+<script src="__PUBLIC__/js/jquery.js"></script>
+<script>
+	$(function(){
+		$('input[level=1]').click(function(){
+			var inputs = $(this).parents('#app').find('input');
+			$(this).prop("checked")?inputs.prop('checked',true):inputs.prop('checked',false);
+		});
+		$('input[level=2]').click(function(){
+			var inputs = $(this).parents('.panel-body').find('input');
+			$(this).prop("checked")?inputs.prop('checked',true):inputs.prop('checked',false);
+		});
+	});
+</script>
+</body>
+</html>

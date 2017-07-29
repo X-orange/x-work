@@ -1,0 +1,29 @@
+a:hover{
+	text-decoration: none;
+}
+#app{
+	
+	margin: 10px 0;
+}
+
+#app-tit{
+	margin-right: 10px;
+}
+#app-cont:frist-child div.panel-body{
+	
+}
+div.panel-body{
+	/*padding-bottom: 0;!important*/
+}
+#action{
+	margin-bottom: 10px;
+	font-size: 14px;
+}
+#action strong{
+	margin-right: 10px;
+}
+#method{
+	margin-top: 10px;
+	display: inline-block;
+	width: 200px;
+}
